@@ -36,7 +36,7 @@ usage() if !defined $opts->{c};
 die "Can't read config $opts->{c}!"
 	if !-r $opts->{c};
 
-my $message = join $/, <STDIN>;
+my $message = join "", <STDIN>;
 
 die 'Not message is specified! Specify your message via STDIN.'
 	if !defined $message;
