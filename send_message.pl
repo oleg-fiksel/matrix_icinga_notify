@@ -1,5 +1,6 @@
 #!/usr/bin/perl
 use strict;
+use warnings;
 
 use constant VERSION => 0.1;
 
@@ -42,8 +43,7 @@ my $config = read_config($opts->{c});
 $ENV{PERL_NET_HTTPS_SSL_SOCKET_CLASS} = 'IO::Socket::SSL'
 	if $opts->{s};
 
-main();
-exit 0;
+exit(main());
 
 sub usage{
 	print <<EOF;
@@ -105,4 +105,5 @@ sub main{
 		print 'Content type is ', $response->content_type, $/;
 		print 'Content is:', $response->content, $/;
 	}
+	return 0;
 }
