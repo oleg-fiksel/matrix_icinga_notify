@@ -53,6 +53,9 @@ exit(main());
 
 sub usage{
 	print <<EOF;
+
+Icinga matrix notifier version $version
+
 Usage:
 	echo 'Message text (also <strong>bold</strong>).' | $0 -c config.cfg [-ds]
 	-c 		config file
