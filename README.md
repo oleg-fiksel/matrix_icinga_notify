@@ -30,3 +30,13 @@ define command{
 	command_line	/usr/bin/printf "%b" "***** Icinga *****<br>Notification Type: $NOTIFICATIONTYPE$<br>Service: <strong>$SERVICEDESC$</strong><br>Host: <strong>$HOSTALIAS$</strong><br>Address: <strong>$HOSTADDRESS$</strong><br>State: <strong>$SERVICESTATE$</strong><br>Date/Time: $LONGDATETIME$<br>Additional Info:<pre><code>$SERVICEOUTPUT$\n$LONGSERVICEOUTPUT$</code></pre>" | /opt/matrix_icinga_notify/send_message.pl -c /run/secrets/my-config.cfg
 	}
 ```
+
+# Usage
+
+```
+# ./send_message.pl --help
+echo 'Message text (also <strong>bold</strong>).' | ./send_message.pl -c config.cfg [-ds]
+        -c              config file
+        -d              debug
+        -s              disable SSL cert verification
+```
