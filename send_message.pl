@@ -2,7 +2,13 @@
 use strict;
 use warnings;
 
-use constant VERSION => 0.1;
+# Unicode
+use utf8;
+binmode(STDIN, ":encoding(UTF-8)");
+binmode(STDOUT, ":encoding(UTF-8)");
+binmode(STDERR, ":encoding(UTF-8)");
+
+our $version = '1.0.0';
 
 # core modules
 use Getopt::Std;
@@ -60,7 +66,7 @@ sub read_config{
 	my $handle;
 	my $config_name=pop;
 	my $config = {};
-	open $handle, '<', $config_name;
+	open $handle, "<:encoding(utf8)", $config_name;
 	while (<$handle>) {
 		chomp;                  # no newline
 		s/#.*//;                # no comments
