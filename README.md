@@ -2,7 +2,8 @@
 
 # Dependencies
 
-* `cpanm LWP`
+* CPANM: `cpanm LWP LWP::Protocol::https`
+* Ubuntu: `apt-get install -y libwww-perl`
 
 # Getting access token
 
