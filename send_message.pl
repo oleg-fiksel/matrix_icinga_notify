@@ -8,7 +8,7 @@ binmode(STDIN, ":encoding(UTF-8)");
 binmode(STDOUT, ":encoding(UTF-8)");
 binmode(STDERR, ":encoding(UTF-8)");
 
-our $version = '1.0.1';
+our $version = '1.1.0';
 
 # core modules
 use Getopt::Std;
