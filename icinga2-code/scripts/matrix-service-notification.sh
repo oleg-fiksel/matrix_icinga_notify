@@ -125,45 +125,46 @@ fi
 ## Build the notification message
 NOTIFICATION_MESSAGE=`cat << EOF
 $ico<font color="$s_color"><strong>***** Service Monitoring on $ICINGA2HOST *****</font></strong><br>
-Notification Type: $NOTIFICATIONTYPE<br>
-
-<strong>$SERVICEDISPLAYNAME on $HOSTDISPLAYNAME is <font color="$s_color">$SERVICESTATE!</font></strong><br>
-
-Info:<br>
-<br>
+<!-- -->
+<strong>Type:</strong>&emsp;&emsp;&ensp;&#160; $NOTIFICATIONTYPE<br>
+<!-- -->
+<strong>Message: &emsp;$SERVICEDISPLAYNAME on $HOSTDISPLAYNAME is <font color="$s_color">$SERVICESTATE!</font></strong><br>
+<!-- -->
+<strong>Info:</strong><br>
 <font color="$s_color">$SERVICEOUTPUT</font><br>
-<br>
-<strong>When:</strong>    $LONGDATETIME<br>
-<strong>Service:</strong> $SERVICENAME<br>
-<strong>Host:</strong>    $HOSTNAME<br>
+<!-- -->
+<strong>When:</strong>&emsp;&emsp;&#160; $LONGDATETIME<br>
+<!-- -->
+<strong>Service:</strong>&emsp;&ensp; $SERVICENAME<br>
+<!-- -->
+<strong>Host:</strong>&emsp;&emsp;&emsp;$HOSTNAME<br>
 EOF
 `
 
 ## Check whether IPv4 was specified.
 if [ -n "$HOSTADDRESS" ] ; then
   NOTIFICATION_MESSAGE="$NOTIFICATION_MESSAGE
-<strong>IPv4:</strong>  $HOSTADDRESS<br>"
+<strong>IPv4:</strong>&emsp;&emsp;&emsp; $HOSTADDRESS<br>"
 fi
 
 ## Check whether IPv6 was specified.
 if [ -n "$HOSTADDRESS6" ] ; then
   NOTIFICATION_MESSAGE="$NOTIFICATION_MESSAGE
-<strong>IPv6:</strong>  $HOSTADDRESS6<br>"
+<strong>IPv6:</strong>&emsp;&emsp;&emsp;  $HOSTADDRESS6<br>"
 fi
 
 ## Check whether author and comment was specified.
 if [ -n "$NOTIFICATIONCOMMENT" ] ; then
   NOTIFICATION_MESSAGE="$NOTIFICATION_MESSAGE
 
-<strong>Comment by $NOTIFICATIONAUTHORNAME:</strong>
-<font color="#3333ff">$NOTIFICATIONCOMMENT</font><br>"
+<strong>Comment: </strong>&#160;
+<font color="#3333ff">$NOTIFICATIONCOMMENT</font> by <font color="#c47609">$NOTIFICATIONAUTHORNAME</font><br>"
 fi
 
 ## Check whether Icinga Web 2 URL was specified.
 if [ -n "$ICINGAWEB2URL" ] ; then
   NOTIFICATION_MESSAGE="$NOTIFICATION_MESSAGE
-<strong>Direct Link:</strong><br>
-$ICINGAWEB2URL/monitoring/service/show?host=$(urlencode "$HOSTNAME")&service=$(urlencode "$SERVICENAME")"
+<strong>Link:</strong>&emsp;&emsp;&emsp;<a href=$ICINGAWEB2URL/monitoring/service/show?host=$(urlencode "$HOSTNAME")&service=$(urlencode "$SERVICENAME")>Show in Icinga2</a>"
 fi
 
 /usr/bin/printf "%b" "$NOTIFICATION_MESSAGE" | /opt/matrix_icinga_notify/send_message.pl -c /run/secrets/my-config.cfg
