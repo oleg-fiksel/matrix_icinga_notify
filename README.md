@@ -32,6 +32,14 @@ define command{
 	}
 ```
 
+# Icinga (2) config
+The `icinga2-code` folder contains the necessary code for matrix notifications in Icinga2. Make sure to place your config with Docker Secrets or Kubernetes Secrets at `/run/secrets/my-config.cfg`or adjust `/run/secrets/my-config.cfg` in the notification scripts to reflect your needs. The same applies to the location of the perl script. It's assumed to be at `/opt/matrix_icinga_notify/send_message.pl`
+
+* `cp -rp icinga2-code/conf.d/ /etc/icinga2/conf.d/`
+* `cp -rp icinga2-code/scripts/ /etc/icinga2/scripts/`
+* Debian / Ubuntu: `chown nagios:nagios /etc/icinga2/scripts/matrix-*-notification.sh`
+* RHEL / CentOS: `chown icinga:icinga /etc/icinga2/scripts/matrix-*-notification.sh`
+
 # Usage
 
 ```
