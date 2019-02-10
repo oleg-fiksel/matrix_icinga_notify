@@ -49,4 +49,3 @@ echo 'Message text (also <strong>bold</strong>).' | ./send_message.pl -c config.
         -d              debug
         -s              disable SSL cert verification
 ```
-
