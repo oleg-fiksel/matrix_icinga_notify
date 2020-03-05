@@ -1,3 +1,7 @@
+# 1.2.0
+
+* Changed POST to PUT for sending the message to comply with the spec (https://matrix.org/docs/api/client-server/#!/Room32participation/sendMessage)
+
 # v1.1.0
 
 * Icinga2 notification template (thanks to Michael Siebertz https://github.com/eifelmicha)
