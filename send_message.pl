@@ -8,7 +8,7 @@ binmode(STDIN, ":encoding(UTF-8)");
 binmode(STDOUT, ":encoding(UTF-8)");
 binmode(STDERR, ":encoding(UTF-8)");
 
-our $version = '1.1.0';
+our $version = '1.2.0';
 
 # core modules
 use Getopt::Std;
@@ -90,7 +90,9 @@ sub main{
 	$config->{url} = join '', $config->{server_url},
 		'/_matrix/client/r0/rooms/',
 		$config->{room},
-		'/send/m.room.message?access_token=',
+		'/send/m.room.message/',
+		int(rand(10000)),
+		'?access_token=',
 		$config->{access_token};
 	
 	# create new LWC object
@@ -105,8 +107,8 @@ sub main{
 		"body" => $message
 	};
 	
-	# encode data to JSON and send post request
-	my $response = $browser->post( $config->{url}, [], Content => encode_json($data) );
+	# encode data to JSON and send via put request
+	my $response = $browser->put( $config->{url}, [], Content => encode_json($data) );
 	
 	# error reporting
 	die "Error: ",$response->content unless $response->is_success;

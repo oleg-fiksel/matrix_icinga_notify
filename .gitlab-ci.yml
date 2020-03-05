@@ -1,0 +1,77 @@
+.common_before_script: &common_before_script
+  - echo "server_url = ${server_url}" >config.cfg
+  - echo "room = ${room}" >>config.cfg
+  - echo "access_token = ${access_token}" >>config.cfg
+
+.common_after_script: &common_after_script
+  - rm -v config.cfg
+
+test_ubuntu_18_04:
+  stage: test
+  variables:
+    IMAGE: ubuntu:18.04
+  image: ${IMAGE}
+  before_script: *common_before_script
+  script:
+    - apt-get update && apt-get install -y libwww-perl
+    - echo "CI <strong>test</strong> (${IMAGE})." | ./send_message.pl -c config.cfg -d
+  after_script: *common_after_script
+
+test_ubuntu_16_04:
+  stage: test
+  variables:
+    IMAGE: ubuntu:16.04
+  image: ${IMAGE}
+  before_script: *common_before_script
+  script:
+    - apt-get update && apt-get install -y libwww-perl
+    - echo "CI <strong>test</strong> (${IMAGE})." | ./send_message.pl -c config.cfg -d
+  after_script: *common_after_script
+
+test_debian_stable:
+  stage: test
+  variables:
+    IMAGE: debian:stable
+  image: ${IMAGE}
+  before_script: *common_before_script
+  script:
+    - apt-get update && apt-get install -y libwww-perl
+    - echo "CI <strong>test</strong> (${IMAGE})." | ./send_message.pl -c config.cfg -d
+  after_script: *common_after_script
+
+test_debian_8:
+  # TODO: fix debian 8
+  when: manual
+  stage: test
+  variables:
+    IMAGE: debian:8
+  image: ${IMAGE}
+  before_script: *common_before_script
+  script:
+    - apt-get update && apt-get install -y libwww-perl
+    - echo "CI <strong>test</strong> (${IMAGE})." | ./send_message.pl -c config.cfg -d
+  after_script: *common_after_script
+
+test_debian_9:
+  stage: test
+  variables:
+    IMAGE: debian:9
+  image: ${IMAGE}
+  before_script: *common_before_script
+  script:
+    - apt-get update && apt-get install -y libwww-perl
+    - echo "CI <strong>test</strong> (${IMAGE})." | ./send_message.pl -c config.cfg -d
+  after_script: *common_after_script
+
+test_centos_6:
+  # TODO: fix centos 6
+  when: manual
+  stage: test
+  variables:
+    IMAGE: centos:6
+  image: ${IMAGE}
+  before_script: *common_before_script
+  script:
+    - yum install -y perl-libwww-perl perl-JSON perl-Digest-SHA
+    - echo "CI <strong>test</strong> (${IMAGE})." | ./send_message.pl -c config.cfg -d
+  after_script: *common_after_script
