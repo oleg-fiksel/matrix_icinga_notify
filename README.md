@@ -1,4 +1,8 @@
-# Matrix icinga notifier
+# Matrix Icinga notifier
+
+Send notifications from Icinga(1,2) to a Matrix room.
+
+![Icinga1 notification](images/screenshot01.png)
 
 # Dependencies
 
