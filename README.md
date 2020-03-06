@@ -3,7 +3,7 @@
 # Dependencies
 
 * CPANM: `cpanm LWP LWP::Protocol::https`
-* Ubuntu: `apt-get install -y libwww-perl`
+* Ubuntu/Debian: `apt-get install -y libwww-perl`
 
 # Getting access token
 
@@ -49,3 +49,9 @@ echo 'Message text (also <strong>bold</strong>).' | ./send_message.pl -c config.
         -d              debug
         -s              disable SSL cert verification
 ```
+
+# Known bugs
+
+## Debian 8 and CentOS 6
+
+Currently there are different errors running the script on Debian 8 and CentOS 6. Probably it's because of old/missing dependencies. This can be avoided by installing the Perl modules using CPAN or CPANM.
